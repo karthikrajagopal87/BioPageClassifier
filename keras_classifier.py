@@ -35,10 +35,10 @@ NUM_WORDS = 5000
 # Keras parameters
 # ---------------------------------------------------------
 # The name of the saved dataframe (helps with caching)
-KERAS_TRAINING_SET_NAME = "keras_training_set.plk"
+KERAS_TRAINING_SET_NAME = "training-data/keras_training_set.plk"
 
 # The trained model name
-KERAS_MODEL_NAME = "keras-bio-model-seed-{}".format(SEED)
+KERAS_MODEL_NAME = "bio-model"
 
 # The filename in which the graphical picture of Keras NN will be saved
 KERAS_MODEL_ARCH_PLOT_NAME = "{}-arch-plot.png".format(KERAS_MODEL_NAME)
@@ -47,7 +47,8 @@ KERAS_MODEL_ARCH_PLOT_NAME = "{}-arch-plot.png".format(KERAS_MODEL_NAME)
 KERAS_MODEL_HISTORY_PLOT_NAME = "{}-history-plot.png".format(KERAS_MODEL_NAME)
 
 # Location of Glove.6B dataset (will be used for the embedding layer)
-GLOVE_6B_PATH = '/home/machine/Downloads/glove.6B/glove.6B.300d.txt'
+# Download http://nlp.stanford.edu/data/glove.6B.zip
+GLOVE_6B_PATH = '.glove.6B/glove.6B.300d.txt'
 
 # Number of epochs for training
 EPOCH = 100
@@ -263,7 +264,6 @@ def create_model():
     # Creating embedding matrix
     print("Create word embedding matrix from Glove6B")
     vocab_size = len(tokenizer.word_index) + 1
-    # Download http://nlp.stanford.edu/data/glove.6B.zip
     embedding_matrix = create_embedding_matrix(GLOVE_6B_PATH, tokenizer.word_index, EMBEDDING_DIM)
     nonzero_elements = np.count_nonzero(np.count_nonzero(embedding_matrix, axis=1))
     print("Embedding Ratio: ", nonzero_elements / vocab_size)
