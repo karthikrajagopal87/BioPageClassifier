@@ -27,3 +27,10 @@ $ scrapy runspider crawler.py \
   -a output=/tmp \
   -a exclude='.+?(show|business).+?'
 ```
+
+## Classifier
+Classifier model is saved in `bio-model`
+### Accuracy / Loss Chart
+![Accuracy Loss Chart](bio-model-history-plot.png)
+### Model Architecture Chart
+![Architecture](bio-model-arch-plot.png)
