@@ -56,3 +56,29 @@ bio_identifier.is_bio_url("https://sites.google.com/a/oakland.edu/scottcrabill/H
 ...
 bio_identifier.is_bio_html_content("<html>....</html>")
 ```
+
+And just to play around in python console
+```python
+from utils import *
+processor = TextProcessor()
+def get_url_text(url):
+    with urllib.request.urlopen(url) as response:
+        html = response.read()
+    text = BeautifulSoup(html, 'html.parser').get_text(separator=" ")
+    return processor.process_text(text)
+
+model = tf.keras.models.load_model("bio-model", custom_objects={'KerasLayer': hub.KerasLayer})
+
+
+def get_scores(urls):
+	for u in urls:
+		txt = get_url_text(u)
+		print("{} - {}".format(model.predict([txt])[0][0], txt[:50]))
+
+
+urls = [
+    "https://cnn.com"
+]
+
+get_scores(urls)
+```
