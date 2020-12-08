@@ -18,14 +18,19 @@ class CrawlerSpider(CrawlSpider):
         self.base_url = kw.get('start_url')
         self._db = TinyDB(kw.get('db'))
         if kw.get('exclude'):
-            self.rules = [(Rule(LinkExtractor(deny=kw.get('exclude'), unique=True),
-                          callback='parse', follow=True))]
-            self._compile_rules()
+            self.rules = [(
+                Rule(LinkExtractor(deny=kw.get('exclude'), unique=True), callback='parse', follow=True)
+            )]
+        else:
+            self.rules = [(
+                Rule(LinkExtractor(unique=True), callback='parse', follow=True)
+            )]
+        self._compile_rules()
         self._pages = pathlib.PurePath(pathlib.Path().absolute(), kw.get('output'))
         Path(self._pages).mkdir(parents=True, exist_ok=True)
 
     def parse(self, response):
-        text = BeautifulSoup(response.xpath('//*').get()).get_text()
+        text = BeautifulSoup(response.xpath('//*').get(), 'html.parser').get_text().lower()
         tokens = nltk.word_tokenize(text)
         normalized_text = ' '.join([word for word in tokens if word.isalnum()])
         file_path = pathlib.PurePath(self._pages, "{}.html".format(uuid.uuid1()))
