@@ -5,6 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
+/bio-model/
+*.plk
 
 # Distribution / packaging
 .Python
