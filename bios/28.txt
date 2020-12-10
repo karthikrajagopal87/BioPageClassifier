@@ -1,0 +1,4 @@
+ Wai-Tat Fu Associate Professor 4226 Siebel Center for Comp Sci 201 N. Goodwin Ave. Urbana Illinois 61801 (217) 244-8617 wfu@illinois.edu : Research Areas Graphics, Visualization and HCI . Research Areas Graphics, Visualization and HCI . . . 
+
+Key Words based on Topic Modelling done through SPACY:
+research	areas	graphics	visualization	hci	
